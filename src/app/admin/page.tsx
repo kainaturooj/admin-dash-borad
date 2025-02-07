@@ -20,7 +20,7 @@ export default function AdminLogin() {
       // Redirect to Admin Dashboard
       router.push("/admin/dashboard");
     } else {
-      alert("Invalid email or password");
+      alert("Invalid email or password  \n use and proceed.... \n email:  kainaturooj1804a@gmail.com \n password:  kaneezfatima");
     }
   };
 
