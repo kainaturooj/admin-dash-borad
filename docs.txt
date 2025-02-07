@@ -1,0 +1,322 @@
+clerk implementation for authentication.
+// import { useRouter } from "next/navigation";
+// import { useState } from "react";
+// import {useUser} from "@clerk/nextjs"
+// import { SignIn,SignOutButton,SignInButton,SignedIn,SignedOut } from "@clerk/nextjs";
+
+// export default function AdminLogin() {
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+
+//   const router = useRouter();
+
+//   const handleLogin = (e: React.FormEvent) => {
+//     e.preventDefault();
+
+
+//     if (email === "kainaturooj1804a@gmail.com" && password === "kaneezfatima") {
+//       localStorage.setItem("isLoggedIn", "true");
+//       router.push("/admin/dashboard");
+//     } else {
+//       alert("Invalid email or password");
+//     }
+    
+//   };
+
+//   // ///// login condition with redirect /////
+//   export default function(){
+//     const {user} = useUser()
+//     const router = useRouter()
+//   }
+
+
+
+//   return (
+//     <div className="flex justify-center items-center h-screen bg-gray-100">
+//       <form onSubmit={handleLogin} className="bg-white p-6 rounded shadow-md">
+//         <h2 className="text-xl font-bold mb-4">Admin Login</h2>
+//         <input
+//           type="email"
+//           placeholder="Email"
+//           onChange={(e) => setEmail(e.target.value)}
+//           className="w-full p-3 mb-4 border border-gray-300 rounded"
+//           value={email}
+//         />
+//         <input
+//           type="password"
+//           placeholder="Password"
+//           onChange={(e) => setPassword(e.target.value)}
+//           className="w-full p-3 mb-4 border border-gray-300 rounded"
+//           value={password}
+//         />
+//         <button
+//           type="submit"
+//           className="bg-red-500 text-white px-4 py-2 rounded w-full"
+//         >
+//           {/* ////////// clerk sign //// */}
+//           <SignedOut>
+//             <SignInButton/>
+//           </SignedOut>
+
+        
+//         </button>
+//       </form>
+//     </div>
+//   );
+// }
+
+
+// //////// gpt code with clerk  ////////
+
+// "use client";
+
+// import { useRouter } from "next/navigation";
+// import { useState } from "react";
+// import { useUser } from "@clerk/nextjs";
+// import { SignInButton, SignedOut } from "@clerk/nextjs";
+
+// export default function AdminLogin() {
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+
+ 
+
+//   const handleLogin = (e: React.FormEvent) => {
+//     e.preventDefault();
+
+
+
+//    const { user } = useUser(); // Clerk user authentication
+
+//   // }
+
+//   return (
+//     <div className="flex justify-center items-center h-screen bg-gray-100">
+//       <form onSubmit={handleLogin} className="bg-white p-6 rounded shadow-md">
+//         <h2 className="text-xl font-bold mb-4">Admin Login</h2>
+
+//         <input
+//           type="email"
+//           placeholder="Email"
+//           onChange={(e) => setEmail(e.target.value)}
+//           className="w-full p-3 mb-4 border border-gray-300 rounded"
+//           value={email}
+//         />
+        
+//         <input
+//           type="password"
+//           placeholder="Password"
+//           onChange={(e) => setPassword(e.target.value)}
+//           className="w-full p-3 mb-4 border border-gray-300 rounded"
+//           value={password}
+//         />
+
+//         <button type="submit" className="bg-red-500 text-white px-4 py-2 rounded w-full">
+//           {/* Login */}
+//           <SignedOut>
+//             <SignInButton />
+//           </SignedOut>
+//         </button>
+
+//         {/* Clerk Authentication */}
+//         {/* <div className="mt-4 text-center">
+//           <SignedOut>
+//             <SignInButton />
+//           </SignedOut>
+//         </div> */}
+//       </form>
+//     </div>
+//   );
+// }
+
+//////////////// gpt code clerk and redirect //////
+
+
+// import { useEffect } from "react";
+// import { useRouter } from "next/navigation";
+// import { useUser } from "@clerk/nextjs";
+// import { SignInButton, SignedOut, SignedIn } from "@clerk/nextjs";
+
+// export default function AdminLogin() {
+//   const router = useRouter();
+//   const { isSignedIn } = useUser(); // Get user authentication state
+
+//   // Redirect user to admin dashboard if signed in
+//   useEffect(() => {
+//     if (!isSignedIn) {
+//       router.push("/admin/dashboard");
+//     }
+//   }, [isSignedIn, router]);
+
+//   return (
+//     <div className="flex justify-center items-center h-screen bg-gray-100">
+//       <div className="bg-white p-6 rounded shadow-md text-center">
+//         <h2 className="text-xl font-bold mb-4">Admin Login</h2>
+
+//         {/* If the user is signed in, show message */}
+//         <SignedIn>
+//           <p className="mb-4 text-green-600">You are already signed in. Redirecting...</p>
+//         </SignedIn>
+
+//         {/* If the user is signed out, show the SignInButton */}
+//         <SignedOut>
+//           <SignInButton mode="modal">
+//             <button className="bg-blue-500 text-white px-4 py-2 rounded w-full">
+//               Sign In
+//             </button>
+//           </SignInButton>
+//         </SignedOut>
+//       </div>
+//     </div>
+//   );
+// }
+
+// //////////////////// without local storage  correct but not shoe both buttons///////////////
+
+// import { useState } from "react";
+// import { useRouter } from "next/navigation";
+// import { SignedOut, SignInButton } from "@clerk/nextjs";
+
+// export default function AdminLogin() {
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const router = useRouter();
+
+//   // Hardcoded Admin Credentials
+//   const adminEmail = "kainaturooj1804a@gmail.com";
+//   const adminPassword = "kaneezfatima";
+
+//   const handleLogin = (e: React.FormEvent) => {
+//     e.preventDefault();
+
+//     if (email === adminEmail && password === adminPassword) {
+//       // Redirect to Admin Dashboard
+//       router.push("/admin/dashboard");
+//     } else {
+//       alert("Invalid email or password");
+//     }
+//   };
+
+//   return (
+//     <div className="flex justify-center items-center h-screen bg-gray-100">
+//       <div className="bg-red-200 p-6 rounded shadow-md text-center">
+//         <h2 className="text-xl font-bold mb-4">Admin Login</h2>
+
+//         {/* Hardcoded Login Form */}
+//         <form onSubmit={handleLogin}>
+//           <input
+//             type="email"
+//             placeholder="Email"
+//             onChange={(e) => setEmail(e.target.value)}
+//             className="w-full p-3 mb-4 border border-gray-300 rounded"
+//             value={email}
+//           />
+//           <input
+//             type="password"
+//             placeholder="Password"
+//             onChange={(e) => setPassword(e.target.value)}
+//             className="w-full p-3 mb-4 border border-gray-300 rounded"
+//             value={password}
+//           />
+//           <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded w-full">
+//             Login
+//           </button>
+//         </form>
+
+//         {/* Clerk Authentication for Alternative Sign-In */}
+//         <div className="bg-slate-500">
+//         <SignedOut>
+//           <div className="mt-4">
+//             <SignInButton mode="modal">
+//               <button className="bg-gray-500 text-white px-4 py-2 rounded w-full">
+//                 Sign In with Clerk
+//               </button>
+//             </SignInButton>
+//           </div>
+//         </SignedOut>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+////////////////////// both buttons show testing ////////////
+
+
+// import { useState } from "react";
+// import { useRouter } from "next/navigation";
+// import { SignedOut, SignInButton } from "@clerk/nextjs";
+
+// export default function AdminLogin() {
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const router = useRouter();
+
+//   // Hardcoded Admin Credentials
+//   const adminEmail = "kainaturooj1804a@gmail.com";
+//   const adminPassword = "kaneezfatima";
+
+//   const handleLogin = (e: React.FormEvent) => {
+//     // e.preventDefault();
+
+//     if (email === adminEmail && password === adminPassword) {
+//       // Redirect to Admin Dashboard
+//       router.push("/admin/dashboard");
+//     } else {
+//       alert("Invalid email or password");
+//     }
+//   };
+
+//   return (
+//     <div className="flex justify-center items-center h-screen bg-gray-100">
+//       <div className="bgwhite bg-green-400 p-6 rounded shadow-md text-center w-96">
+//         <h2 className="text-xl font-bold mb-4">Admin Login</h2>
+
+//         {/* Hardcoded Manual Login Form */}
+//         <form onSubmit={handleLogin} className="mb-4">
+//           <input
+//             type="email"
+//             placeholder="Email"
+//             onChange={(e) => setEmail(e.target.value)}
+//             className="w-full p-3 mb-4 border border-gray-300 rounded"
+//             value={email}
+//           />
+//           <input
+//             type="password"
+//             placeholder="Password"
+//             onChange={(e) => setPassword(e.target.value)}
+//             className="w-full p-3 mb-4 border border-gray-300 rounded"
+//             value={password}
+//           />
+//           {/* <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded w-full"> */}
+//             {/* Sign In (Manual) */}
+         
+//             <SignedOut>
+//               <SignInButton />
+//             </SignedOut>
+        
+//           {/* </button> */}
+//         {/* </form> */}
+
+//         {/* <div className="flex items-center mb-4 bg-green-600">
+//           <hr className="flex-grow border-gray-300" />
+//           <span className="px-2 text-gray-500 text-sm">OR</span>
+//           <hr className="flex-grow border-gray-300" />
+//         </div> */}
+        
+        
+//         {/* Clerk Authentication Sign-In */}
+//         {/* <SignedOut> */}
+//           {/* <SignInButton> */}
+//             {/* <button className="bg-gray-500 text-white px-4 py-2 rounded w-full"> */}
+//               {/* Sign In with Clerk */}
+//             {/* </button> */}
+//           {/* </SignInButton> */}
+//           {/* <SignInButton/> */}
+//         {/* </SignedOut> */}
+//         </form>
+        
+//       </div>
+//     </div>
+//   );
+// }
